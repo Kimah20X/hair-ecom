@@ -14,10 +14,10 @@ export default defineConfig({
   },
 });
 
-interface ImportMetaEnv {
-  readonly VITE_PAYSTACK_PUBLIC_KEY: string;
-}
+// interface ImportMetaEnv {
+//   readonly VITE_PAYSTACK_PUBLIC_KEY: string;
+// }
 
-interface ImportMeta {
-  readonly env: ImportMetaEnv;
-}
+// interface ImportMeta {
+//   readonly env: ImportMetaEnv;
+// }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Check, X } from 'lucide-react';
+import { X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Slider } from '@/components/ui/slider';
@@ -39,7 +39,7 @@ const ProductFilters: React.FC<ProductFiltersProps> = ({
     const newCategories = checked
       ? [...filters.category, categoryId]
       : filters.category.filter(id => id !== categoryId);
-    
+
     onFiltersChange({
       ...filters,
       category: newCategories,
@@ -50,7 +50,7 @@ const ProductFilters: React.FC<ProductFiltersProps> = ({
     const newBrands = checked
       ? [...filters.brand, brandId]
       : filters.brand.filter(id => id !== brandId);
-    
+
     onFiltersChange({
       ...filters,
       brand: newBrands,
@@ -78,7 +78,7 @@ const ProductFilters: React.FC<ProductFiltersProps> = ({
     });
   };
 
-  const hasActiveFilters = 
+  const hasActiveFilters =
     filters.category.length > 0 ||
     filters.brand.length > 0 ||
     filters.priceRange[0] > 0 ||
@@ -261,15 +261,13 @@ const ProductFilters: React.FC<ProductFiltersProps> = ({
             >
               <Checkbox
                 checked={filters.rating === rating}
-                readOnly
               />
               <div className="flex items-center">
                 {[...Array(5)].map((_, i) => (
                   <span
                     key={i}
-                    className={`text-sm ${
-                      i < rating ? 'text-yellow-400' : 'text-gray-300'
-                    }`}
+                    className={`text-sm ${i < rating ? 'text-yellow-400' : 'text-gray-300'
+                      }`}
                   >
                     ★
                   </span>

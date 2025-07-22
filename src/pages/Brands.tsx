@@ -4,7 +4,7 @@ import { ArrowRight, Star, Award } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { brands } from '@/data/products';
+// import { brands } from '@/data/products';
 
 const Brands: React.FC = () => {
   const featuredBrands = [
@@ -132,7 +132,7 @@ const Brands: React.FC = () => {
                       </Badge>
                     </div>
                   </div>
-                  
+
                   <CardContent className="p-6">
                     <div className="flex items-center justify-between mb-3">
                       <h3 className="text-xl font-bold text-slate-900">{brand.name}</h3>
@@ -140,7 +140,7 @@ const Brands: React.FC = () => {
                         {brand.productCount} Products
                       </Badge>
                     </div>
-                    
+
                     <p className="text-slate-600 mb-4 text-sm leading-relaxed">
                       {brand.description}
                     </p>
@@ -153,7 +153,7 @@ const Brands: React.FC = () => {
                           </Badge>
                         ))}
                       </div>
-                      
+
                       <div className="flex justify-between text-xs text-slate-500">
                         <span>Founded: {brand.founded}</span>
                         <span>Origin: {brand.origin}</span>
@@ -184,7 +184,7 @@ const Brands: React.FC = () => {
                 <h3 className="text-2xl font-bold text-slate-900">6</h3>
                 <p className="text-slate-600">Premium Brands</p>
               </div>
-              
+
               <div className="space-y-2">
                 <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Star className="h-8 w-8 text-green-600" />
@@ -192,7 +192,7 @@ const Brands: React.FC = () => {
                 <h3 className="text-2xl font-bold text-slate-900">4.8</h3>
                 <p className="text-slate-600">Average Rating</p>
               </div>
-              
+
               <div className="space-y-2">
                 <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <ArrowRight className="h-8 w-8 text-purple-600" />

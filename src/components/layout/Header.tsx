@@ -19,7 +19,7 @@ const Header: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
 
-  const { items, totalItems, totalPriceUSD, totalPriceNGN } = useCart();
+  const { totalItems, totalPriceNGN } = useCart();
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
@@ -62,8 +62,8 @@ const Header: React.FC = () => {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="rounded-r-none border-r-0 focus:z-10"
               />
-              <Button 
-                type="submit" 
+              <Button
+                type="submit"
                 className="rounded-l-none bg-blue-600 hover:bg-blue-700 text-white font-medium"
               >
                 <Search className="h-4 w-4" />
@@ -76,9 +76,9 @@ const Header: React.FC = () => {
             {/* User menu */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button 
-                  variant="ghost" 
-                  size="sm" 
+                <Button
+                  variant="ghost"
+                  size="sm"
                   className="hidden sm:flex text-slate-700 hover:text-slate-900 hover:bg-slate-100"
                 >
                   <User className="h-4 w-4 mr-2" />
@@ -117,15 +117,15 @@ const Header: React.FC = () => {
 
             {/* Cart */}
             <Link to="/cart">
-              <Button 
-                variant="ghost" 
-                size="sm" 
+              <Button
+                variant="ghost"
+                size="sm"
                 className="relative text-slate-700 hover:text-slate-900 hover:bg-slate-100"
               >
                 <ShoppingCart className="h-4 w-4" />
                 {totalItems > 0 && (
-                  <Badge 
-                    variant="destructive" 
+                  <Badge
+                    variant="destructive"
                     className="absolute -top-2 -right-2 h-5 w-5 flex items-center justify-center p-0 text-xs bg-red-600 text-white"
                   >
                     {totalItems}
@@ -159,8 +159,8 @@ const Header: React.FC = () => {
               onChange={(e) => setSearchQuery(e.target.value)}
               className="rounded-r-none border-r-0"
             />
-            <Button 
-              type="submit" 
+            <Button
+              type="submit"
               className="rounded-l-none bg-blue-600 hover:bg-blue-700 text-white font-medium"
             >
               <Search className="h-4 w-4" />
