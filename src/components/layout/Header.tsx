@@ -18,7 +18,8 @@ import { categories } from '@/data/products';
 const Header: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const { state: cartState } = useCart();
+
+  const { items, totalItems, totalPriceUSD, totalPriceNGN } = useCart();
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
@@ -122,16 +123,16 @@ const Header: React.FC = () => {
                 className="relative text-slate-700 hover:text-slate-900 hover:bg-slate-100"
               >
                 <ShoppingCart className="h-4 w-4" />
-                {cartState.totalItems > 0 && (
+                {totalItems > 0 && (
                   <Badge 
                     variant="destructive" 
                     className="absolute -top-2 -right-2 h-5 w-5 flex items-center justify-center p-0 text-xs bg-red-600 text-white"
                   >
-                    {cartState.totalItems}
+                    {totalItems}
                   </Badge>
                 )}
                 <span className="ml-2 hidden sm:inline font-medium">
-                  ${cartState.totalPrice.toFixed(2)}
+                  ${totalPriceNGN.toFixed(2)}
                 </span>
               </Button>
             </Link>

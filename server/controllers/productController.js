@@ -1,8 +1,8 @@
 const Product = require('../models/Product.js');
 
 
-// Create a new product
-const createProduct = async (req, res) => {
+// Create a new product (admin only, protected by middleware)
+const addProduct = async (req, res) => {
   try {
     const { name, price, category, description, image, stock } = req.body;
 
@@ -54,4 +54,4 @@ const getProductById = async (req, res) => {
   }
 };
 
-module.exports = { getProducts, getProductById, createProduct };
+module.exports = { getProducts, getProductById, addProduct };

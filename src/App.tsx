@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { Toaster } from 'sonner';
 import Layout from '@/components/layout/Layout';
 import { AuthProvider } from '@/context/AuthContext';
@@ -11,6 +11,8 @@ import Login from '@/pages/Login';
 import Register from '@/pages/Register';
 import Brands from '@/pages/Brands';
 import HairCareGuide from '@/pages/HairCareGuide';
+import Checkout from '@/pages/Checkout'; 
+
 
 function App() {
   return (
@@ -26,10 +28,13 @@ function App() {
               <Route path="/register" element={<Register />} />
               <Route path="/brands" element={<Brands />} />
               <Route path="/hair-care-guide" element={<HairCareGuide />} />
+              <Route path="/checkout" element={<Checkout />} /> 
+              <Route path="/checkout/callback" element={<Checkout />} /> 
               <Route path="*" element={
                 <div className="container mx-auto px-4 py-16 text-center">
                   <h1 className="text-2xl font-bold">Page Not Found</h1>
                   <p className="text-slate-600 mt-4">The page you're looking for doesn't exist.</p>
+                  <Link to="/" className="text-blue-500 underline mt-4 block">Back to Home</Link>
                 </div>
               } />
             </Routes>

@@ -8,9 +8,9 @@ import CartItem from '@/components/cart/CartItem';
 import { useCart } from '@/context/CartContext';
 
 const Cart: React.FC = () => {
-  const { state: cartState, clearCart } = useCart();
+  const { items, totalItems, totalPriceNGN, clearCart } = useCart();
 
-  if (cartState.items.length === 0) {
+  if (items.length === 0) {
     return (
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-md mx-auto text-center">
@@ -29,10 +29,14 @@ const Cart: React.FC = () => {
     );
   }
 
-  const subtotal = cartState.totalPrice;
-  const shipping = subtotal >= 50 ? 0 : 5.99;
-  const tax = subtotal * 0.08; // 8% tax
-  const total = subtotal + shipping + tax;
+  const subtotalUSD = totalPriceNGN / 1500; // Reverse-engineer USD from NGN using fixed rate of 1500
+  const shippingUSD = subtotalUSD >= 50 ? 0 : 5.99;
+  const taxUSD = subtotalUSD * 0.08; // 8% tax
+  const totalUSD = subtotalUSD + shippingUSD + taxUSD;
+
+  const shippingNGN = shippingUSD * 1500;
+  const taxNGN = taxUSD * 1500;
+  const totalNGN = totalUSD * 1500;
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -51,7 +55,7 @@ const Cart: React.FC = () => {
           <Card>
             <CardHeader className="pb-4">
               <div className="flex items-center justify-between">
-                <CardTitle>Cart Items ({cartState.totalItems})</CardTitle>
+                <CardTitle>Cart Items ({totalItems})</CardTitle>
                 <Button
                   variant="ghost"
                   size="sm"
@@ -64,8 +68,8 @@ const Cart: React.FC = () => {
             </CardHeader>
             <CardContent className="pt-0">
               <div className="space-y-0">
-                {cartState.items.map((item) => (
-                  <CartItem key={item.id} item={item} />
+                {items.map((item) => (
+                  <CartItem key={item.id} item={item as import('@/types').CartItem} />
                 ))}
               </div>
             </CardContent>
@@ -80,43 +84,43 @@ const Cart: React.FC = () => {
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex justify-between">
-                <span>Subtotal ({cartState.totalItems} items)</span>
-                <span>${subtotal.toFixed(2)}</span>
+                <span>Subtotal ({totalItems} items)</span>
+                <span>${subtotalUSD.toFixed(2)} USD / ₦{totalPriceNGN.toLocaleString()} NGN</span>
               </div>
               
               <div className="flex justify-between">
                 <span>Shipping</span>
                 <span>
-                  {shipping === 0 ? (
+                  {shippingUSD === 0 ? (
                     <span className="text-green-600">FREE</span>
                   ) : (
-                    `$${shipping.toFixed(2)}`
+                    `$${shippingUSD.toFixed(2)} USD / ₦${shippingNGN.toLocaleString()} NGN`
                   )}
                 </span>
               </div>
               
-              {shipping === 0 && (
+              {shippingUSD === 0 && (
                 <p className="text-sm text-green-600">
                   ✓ You qualify for free shipping!
                 </p>
               )}
               
-              {shipping > 0 && (
+              {shippingUSD > 0 && (
                 <p className="text-sm text-slate-600">
-                  Add ${(50 - subtotal).toFixed(2)} more for free shipping
+                  Add ${(50 - subtotalUSD).toFixed(2)} more for free shipping
                 </p>
               )}
               
               <div className="flex justify-between">
                 <span>Tax</span>
-                <span>${tax.toFixed(2)}</span>
+                <span>${taxUSD.toFixed(2)} USD / ₦{taxNGN.toLocaleString()} NGN</span>
               </div>
               
               <Separator />
               
               <div className="flex justify-between text-lg font-semibold">
                 <span>Total</span>
-                <span>${total.toFixed(2)}</span>
+                <span>${totalUSD.toFixed(2)} USD / ₦{totalNGN.toLocaleString()} NGN</span>
               </div>
               
               <Link to="/checkout" className="w-full">
@@ -126,7 +130,7 @@ const Cart: React.FC = () => {
               </Link>
               
               <p className="text-xs text-slate-500 text-center">
-                Secure checkout powered by Stripe
+                Secure checkout powered by Paystack
               </p>
             </CardContent>
           </Card>
